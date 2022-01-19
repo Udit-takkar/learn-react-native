@@ -22,7 +22,8 @@
     "react-native-safe-area-context": "^3.3.2",
     "react-native-screens": "^3.10.1",
     "react-native-vector-icons": "^9.0.0",
-    "react-redux": "^7.2.6"
+    "react-redux": "^7.2.6",
+    "reselect": "^4.1.5"
   },
   "devDependencies": {
     "@babel/core": "^7.12.9",
