@@ -1,28 +1,26 @@
-import {createSlice} from '@reduxjs/toolkit';
+import {createEntityAdapter, createSlice} from '@reduxjs/toolkit';
 
-let nextTodoId = 0;
+const todosAdapter = createEntityAdapter({
+  selectId: ({id}) => id,
+});
 
+console.log(todosAdapter.getInitialState());
 const todosSlice = createSlice({
   name: 'todos',
-  initialState: [],
+  initialState: todosAdapter.getInitialState(),
   reducers: {
-    pushTodo(state, action) {
-      console.log('action', action);
-      state.push({
-        id: nextTodoId++,
-        text: action.payload.text,
-        completed: false,
-      });
-    },
-    toggleTodo(state, action) {
-      const todo = state.find(todo => todo.id === action.payload);
-      if (todo) {
-        todo.completed = !todo.completed;
+    todoAdded: todosAdapter.addOne,
+    todoRemoved: todosAdapter.removeOne,
+    toggleIsCompleted: (state, action) => {
+      const {id, newValue} = action.payload;
+      const todo = state.entities[id];
+      if (todo && todo.isComplete !== newValue) {
+        todo.isComplete = newValue;
       }
     },
   },
 });
 
-export const {pushTodo, toggleTodo} = todosSlice.actions;
+export const {todoAdded, todoRemoved, toggleIsCompleted} = todosSlice.actions;
 
 export default todosSlice.reducer;

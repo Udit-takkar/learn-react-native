@@ -1,21 +1,20 @@
 import React, {useState} from 'react';
 import {View, TextInput, StyleSheet, Button} from 'react-native';
-// import {useDispatch} from 'react-redux';
-// import {pushTodo} from './todosSlice';
-import {saveTodo} from '../../data/helpers';
-
+import {useDispatch} from 'react-redux';
+import {todoAdded} from './todosSlice';
+// import {saveTodo} from '../../data/helpers';
+let todoId = 0;
 const AddToDo = () => {
   const [text, setText] = useState();
-  // const dispatch = useDispatch();
+  const dispatch = useDispatch();
   const handleSubmit = async () => {
     try {
-      await saveTodo({text});
+      // await saveTodo({text});
+      dispatch(todoAdded({id: ++todoId, text, isComplete: false}));
       setText('');
     } catch (e) {
       console.log(e);
     }
-
-    // dispatch(pushTodo({text}));
   };
   return (
     <View style={styles.container}>
@@ -33,12 +32,14 @@ const AddToDo = () => {
 const styles = StyleSheet.create({
   container: {
     margin: 2,
+    flexDirection: 'row',
   },
   input: {
     backgroundColor: 'ghostwhite',
     marginBottom: 8,
     padding: 8,
     height: 40,
+    flex: 1,
   },
 });
 export default AddToDo;
