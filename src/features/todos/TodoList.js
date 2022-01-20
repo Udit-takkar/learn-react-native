@@ -61,7 +61,7 @@ function TodoList({navigation}) {
     <View style={styles.container}>
       <SectionList
         sections={[
-          {title: 'Not Completed Todod', data: notCompletedTodos},
+          {title: 'Not Completed Todos', data: notCompletedTodos},
           {title: 'Completed Todos', data: completedTodos},
         ]}
         keyExtractor={(item, index) => index}
@@ -111,6 +111,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     marginTop: 10,
+    marginHorizontal: 30,
   },
   todoText: {
     fontSize: 20,
@@ -118,6 +119,7 @@ const styles = StyleSheet.create({
   },
   header: {
     fontSize: 25,
-    backgroundColor: '#fff',
+    minWidth: '100%',
+    marginHorizontal: 15,
   },
 });
